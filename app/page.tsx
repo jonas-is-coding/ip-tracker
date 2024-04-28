@@ -16,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     const fetchIP = async () => {
       try {
-        const response = await fetch("https://ip-api.com/json/?fields=61439");
+        const response = await fetch("http://ip-api.com/json/?fields=61439");
         const data = await response.json();
         setIp(data.query);
         setCity(data.city);
