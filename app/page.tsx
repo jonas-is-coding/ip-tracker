@@ -34,6 +34,11 @@ export default function Home() {
     fetchIP();
   }, []);
 
+  const copyText = () => {
+    const text = "I am very sorry... You are right!"
+    navigator.clipboard.writeText(text)
+  }
+
   return (
     <main className="bg-black h-screen overflow-hidden">
       <NavBar />
@@ -66,7 +71,7 @@ export default function Home() {
             Host: {host}
           </li>
         </ul>
-        <Button variant={"outline"} className="w-full text-xl" size={"lg"}>
+        <Button variant={"outline"} className="w-full text-xl" size={"lg"} onClick={() => copyText()}>
           Commit your fault 🤓
         </Button>
       </div>
