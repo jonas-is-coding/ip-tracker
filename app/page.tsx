@@ -1,15 +1,14 @@
-"use client"
-import React, { useState, useEffect, startTransition } from 'react';
+"use client";
+import React, { useState, useEffect } from "react";
 import Video from "@/components/ip/video";
-import { IPAddress } from "@/lib/types/type";
 import NavBar from "@/components/navbar";
 
 export default function Home() {
-  const [ip, setIp] = useState('');
-  const [city, setCity] = useState('');
-  const [country, setCountry] = useState('');
-  const [lat, setLat] = useState('');
-  const [lon, setLon] = useState('');
+  const [ip, setIp] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [lat, setLat] = useState("");
+  const [lon, setLon] = useState("");
   const [host, setHost] = useState('');
 
   useEffect(() => {
@@ -32,36 +31,21 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-black">
+    <main className="bg-black h-screen overflow-hidden">
       <NavBar />
-      <div>
-        {ip && (
-          <div className='text-white absolute top-44 left-40 font-bold text-2xl'>
-            IP Address: {ip}
-          </div>
-        )}
-        {city && (
-          <div className='text-white absolute top-44 left-40 font-bold text-2xl'>
-            City: {city}
-          </div>
-        )}
-        {country && (
-          <div className='text-white absolute top-44 left-40 font-bold text-2xl'>
-            Country: {country}
-          </div>
-        )}
-        {lat && (
-          <div className='text-white absolute top-96 left-52 font-bold text-2xl'>
-            N: {lat}
-          </div>
-        )}
-        {lon && (
-          <div className='text-white absolute top-44 right-40 font-bold text-2xl'>
-            W: {lon}
-          </div>
-        )}
+      <div className="flex items-center justify-between w-full h-screen px-20">
+      <div className="w-full h-[600px] pt-10">
+        <Video />
       </div>
-      <Video />
+      <div className="w-[450px] text-center flex flex-col items-center ">
+        <h2 className="text-white text-4xl font-semibold">Your information:</h2>
+        <ul className="h-full">
+          <li>
+            Ip Adress: {ip}
+          </li>
+        </ul>
+      </div>
+      </div>
     </main>
   );
 }

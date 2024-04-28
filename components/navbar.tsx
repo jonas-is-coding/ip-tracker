@@ -1,6 +1,6 @@
 export default function NavBar() {
     return (
-        <nav className="fixed left-0 top-0 h-20 w-full flex px-20 items-center justify-between text-white">
+        <nav className="fixed top-0 left-0 h-20 w-full flex lg:px-20 items-center justify-between text-white md:px-10 sm:px-5">
             <a href="/" className="text-3xl font-semibold">
             🤓 IP-Tracker
             </a>
