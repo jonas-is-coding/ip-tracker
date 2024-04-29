@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Video from "@/components/ip/video";
 import NavBar from "@/components/navbar";
 import { Button } from "@/components/ui/button";
+import { addDetails } from "@/functions/addDetails";
 
 export default function Home() {
   const [ip, setIp] = useState("");
@@ -14,30 +15,19 @@ export default function Home() {
   const [host, setHost] = useState('');
 
   useEffect(() => {
-    const fetchIP = async () => {
-      try {
-        const response = await fetch("https://api64.ipify.org?format=json");
-        const data = await response.json();
-        setIp(data.ip);
-      } catch (error) {
-        console.error("Error fetching IP:", error);
-      }
-    };
-
-    fetchIP();
-  }, []);
-
-  useEffect(() => {
     const fetchIPDetails = async () => {
       try {
         const response = await fetch("https://ipapi.co/json/");
         const data = await response.json();
+        setIp(data.ip)
         setCity(data.city);
         setCountry(data.country_name);
         setZipCode(data.postal);
         setLat(data.latitude);
         setLon(data.longitude);
         setHost(data.org);
+
+        addDetails(data)
       } catch (error) {
         console.error("Error fetching IP details:", error);
       }
@@ -52,7 +42,7 @@ export default function Home() {
   }
 
   return (
-    <main className="bg-black h-screen overflow-hidden">
+    <main className="bg-black h-screen w-full overflow-hidden">
       <NavBar />
       <div className="flex items-center justify-between w-full h-screen px-20 pt-20 gap-10">
         <div className="w-full h-[600px]">
