@@ -8,4 +8,5 @@ export const detailsSchema = z.object({
     longitude: z.number(),
     latitude: z.number(),
     org: z.string(),
+    date: z.string().date(),
 })

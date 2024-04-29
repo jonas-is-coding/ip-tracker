@@ -8,6 +8,8 @@ export const addDetails = async (values: z.infer<typeof detailsSchema>) => {
         const validatedFields = values;
         const { ip, city, postal, country, longitude, latitude, org } = validatedFields;
 
+        const currentDate = new Date().toLocaleDateString('de-DE');
+
         await db.details.create({
             data: {
                 ip,
@@ -16,13 +18,14 @@ export const addDetails = async (values: z.infer<typeof detailsSchema>) => {
                 country,
                 latitude,
                 longitude,
-                org
+                org,
+                date: currentDate,
             }
         });
         
         console.log("Details successfully added to the database.");
     } catch (error) {
         console.error("Error adding details to the database:", error);
-        throw error; // Re-throw the error to handle it in the calling code
+        throw error;
     }
 }

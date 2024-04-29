@@ -8,5 +8,5 @@ CREATE TABLE "details" (
     "latitude" REAL NOT NULL,
     "longitude" REAL NOT NULL,
     "org" TEXT NOT NULL,
-    "date" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "date" TEXT NOT NULL
 );
