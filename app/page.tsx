@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Video from "@/components/ip/video";
 import NavBar from "@/components/navbar";
 import { Button } from "@/components/ui/button";
-import { addDetails } from "@/functions/addDetails";
 
 export default function Home() {
   const [ip, setIp] = useState("");
@@ -26,8 +25,7 @@ export default function Home() {
         setLat(data.latitude);
         setLon(data.longitude);
         setHost(data.org);
-
-        addDetails(data)
+        
       } catch (error) {
         console.error("Error fetching IP details:", error);
       }
