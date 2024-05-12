@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Video from "@/components/ip/video";
 import NavBar from "@/components/navbar";
 import { Button } from "@/components/ui/button";
@@ -11,21 +11,22 @@ export default function Home() {
   const [zipCode, setZipCode] = useState("");
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");
-  const [host, setHost] = useState('');
+  const [host, setHost] = useState("");
+
+  const [buttonText, setButtonText] = useState("Commit your fault 🤓");
 
   useEffect(() => {
     const fetchIPDetails = async () => {
       try {
         const response = await fetch("https://ipapi.co/json/");
         const data = await response.json();
-        setIp(data.ip)
+        setIp(data.ip);
         setCity(data.city);
         setCountry(data.country_name);
         setZipCode(data.postal);
         setLat(data.latitude);
         setLon(data.longitude);
         setHost(data.org);
-        
       } catch (error) {
         console.error("Error fetching IP details:", error);
       }
@@ -34,10 +35,18 @@ export default function Home() {
     fetchIPDetails();
   }, []);
 
+  const commitButton = useRef(null);
+
   const copyText = () => {
-    const text = "I am very sorry... You are right!"
-    navigator.clipboard.writeText(text)
-  }
+    const text = "I am very sorry... You are right!";
+    navigator.clipboard.writeText(text).then(() => {
+      setButtonText("Done!");
+  
+      setTimeout(() => {
+        setButtonText("Commit your fault 🤓");
+      }, 2000);
+    });
+  };
 
   return (
     <main className="bg-black h-screen w-full overflow-hidden">
@@ -47,32 +56,25 @@ export default function Home() {
           <Video />
         </div>
         <div className="w-[450px] text-center flex flex-col items-start justify-start gap-10">
-          <h2 className="text-white text-4xl font-semibold">Your information:</h2>
+          <h2 className="text-white text-4xl font-semibold">
+            Your information:
+          </h2>
           <ul className="h-full w-full text-white flex flex-col items-start gap-5 px-6">
-            <li className="text-left w-full text-xl">
-              Ip Address: {ip}
-            </li>
-            <li className="text-left w-full text-xl">
-              City: {city}
-            </li>
-            <li className="text-left w-full text-xl">
-              Zip Code: {zipCode}
-            </li>
-            <li className="text-left w-full text-xl">
-              Country: {country}
-            </li>
-            <li className="text-left w-full text-xl">
-              Latitude: {lat}
-            </li>
-            <li className="text-left w-full text-xl">
-              Longitude: {lon}
-            </li>
-            <li className="text-left w-full text-xl h-16">
-              Host: {host}
-            </li>
+            <li className="text-left w-full text-xl">Ip Address: {ip}</li>
+            <li className="text-left w-full text-xl">City: {city}</li>
+            <li className="text-left w-full text-xl">Zip Code: {zipCode}</li>
+            <li className="text-left w-full text-xl">Country: {country}</li>
+            <li className="text-left w-full text-xl">Latitude: {lat}</li>
+            <li className="text-left w-full text-xl">Longitude: {lon}</li>
+            <li className="text-left w-full text-xl h-16">Host: {host}</li>
           </ul>
-          <Button variant={"outline"} className="w-full text-xl" size={"lg"} onClick={copyText}>
-            Commit your fault 🤓
+          <Button
+            variant={"outline"}
+            className="w-full text-xl"
+            size={"lg"}
+            onClick={copyText}
+          >
+            {buttonText}
           </Button>
         </div>
       </div>
