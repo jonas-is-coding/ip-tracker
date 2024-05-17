@@ -1,8 +1,9 @@
-"use client";
-import React, { useState, useEffect, useRef } from "react";
-import Video from "@/components/ip/video";
+"use client"
+
+import React, { useState, useEffect } from "react";
 import NavBar from "@/components/navbar";
 import { Button } from "@/components/ui/button";
+import Video from "@/components/ip/video";
 
 export default function Home() {
   const [ip, setIp] = useState("");
@@ -12,7 +13,6 @@ export default function Home() {
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");
   const [host, setHost] = useState("");
-
   const [buttonText, setButtonText] = useState("Commit your fault 🤓");
 
   useEffect(() => {
@@ -35,8 +35,6 @@ export default function Home() {
     fetchIPDetails();
   }, []);
 
-  const commitButton = useRef(null);
-
   const copyText = () => {
     const text = "I am very sorry... You are right!";
     navigator.clipboard.writeText(text).then(() => {
@@ -49,35 +47,37 @@ export default function Home() {
   };
 
   return (
-    <main className="bg-black h-screen w-full overflow-hidden">
-      <NavBar />
-      <div className="flex items-center justify-between w-full h-screen px-20 pt-20 gap-10">
-        <div className="w-full h-[600px]">
-          <Video />
+    <>
+      <main className="bg-black h-screen w-full overflow-hidden">
+        <NavBar />
+        <div className="flex items-center justify-between w-full h-screen px-20 pt-20 gap-10">
+          <div className="w-full h-[600px]">
+            <Video />
+          </div>
+          <div className="w-[450px] text-center flex flex-col items-start justify-start gap-10">
+            <h2 className="text-white text-4xl font-semibold">
+              Your information:
+            </h2>
+            <ul className="h-full w-full text-white flex flex-col items-start gap-5 px-6">
+              <li className="text-left w-full text-xl">Ip Address: {ip}</li>
+              <li className="text-left w-full text-xl">City: {city}</li>
+              <li className="text-left w-full text-xl">Zip Code: {zipCode}</li>
+              <li className="text-left w-full text-xl">Country: {country}</li>
+              <li className="text-left w-full text-xl">Latitude: {lat}</li>
+              <li className="text-left w-full text-xl">Longitude: {lon}</li>
+              <li className="text-left w-full text-xl h-16">Host: {host}</li>
+            </ul>
+            <Button
+              variant={"outline"}
+              className="w-full text-xl"
+              size={"lg"}
+              onClick={copyText}
+            >
+              {buttonText}
+            </Button>
+          </div>
         </div>
-        <div className="w-[450px] text-center flex flex-col items-start justify-start gap-10">
-          <h2 className="text-white text-4xl font-semibold">
-            Your information:
-          </h2>
-          <ul className="h-full w-full text-white flex flex-col items-start gap-5 px-6">
-            <li className="text-left w-full text-xl">Ip Address: {ip}</li>
-            <li className="text-left w-full text-xl">City: {city}</li>
-            <li className="text-left w-full text-xl">Zip Code: {zipCode}</li>
-            <li className="text-left w-full text-xl">Country: {country}</li>
-            <li className="text-left w-full text-xl">Latitude: {lat}</li>
-            <li className="text-left w-full text-xl">Longitude: {lon}</li>
-            <li className="text-left w-full text-xl h-16">Host: {host}</li>
-          </ul>
-          <Button
-            variant={"outline"}
-            className="w-full text-xl"
-            size={"lg"}
-            onClick={copyText}
-          >
-            {buttonText}
-          </Button>
-        </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
