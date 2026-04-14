@@ -97,7 +97,7 @@ export default function Video() {
 
       {autoplayBlocked && (
         <button className="audio-btn" onClick={enableAudio} type="button">
-          Sound einschalten
+          Enable sound
         </button>
       )}
     </div>
